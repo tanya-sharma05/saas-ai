@@ -4,6 +4,7 @@ import cors from 'cors';
 import {clerkMiddleware, requireAuth} from "@clerk/express";
 import aiRouter from './routes/ai.routes.js';
 import connectCloudinary from './config/cloudinary.js';
+import userRouter from './routes/user.routes.js';
 
 const app= express();
 const PORT= process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.get('/', (req,res)=>{
 app.use(requireAuth());
 
 app.use('/api/ai', aiRouter);
+app.use('/api/user', userRouter);
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on PORT ${PORT}`);
