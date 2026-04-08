@@ -1,4 +1,4 @@
-import { useClerk, useUser } from "@clerk/react"
+import { Show, useClerk, useUser } from "@clerk/react"
 import { Eraser, FileText, Hash, House, Image, LogOut, Scissors, SquarePen, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -41,7 +41,10 @@ function Sidebar({sidebar, setSidebar}) {
                 <div onClick={openUserProfile} className="flex gap-2 items-center cursor-pointer">
                     <img src={user?.imageUrl} className="w-8 rounded-full" alt="" />
                     <div>
-                        <h1>{user.fullName}</h1>
+                        <h1 className="text-sm font-medium">{user.fullName}</h1>
+                        <p className="text-xs text-gray-500">
+                            <Show when={{ plan: 'premium' }} fallback={<span>Free</span>}>Premium</Show> Plan
+                        </p>
                     </div>
                 </div>
                 <LogOut onClick={signOut} className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer" />
